@@ -6,6 +6,19 @@
     <title>Upload Files</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/upload_styles.css') }}">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .highlight {
+            animation: fadeIn 2s ease-in-out;
+        }
+        .highlight p {
+            font-weight: bold;
+            color: #ff0000; /* Red color for emphasis */
+        }
+    </style>
 </head>
 <body>
     <header class="bg-dark text-white py-4">
@@ -15,7 +28,15 @@
         </div>
     </header>
     <main class="container mt-4">
-        <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data" class="col-md-6 mx-auto bg-light p-4 rounded">
+        <div class="highlight  p-3 rounded">
+            <p>Note:</p>
+            <ul>
+                <li>Filenames should not contain any spaces.</li>
+                <li>The main file should be named <strong>index.html</strong>.</li>
+                <li>Do not misuse the platform.</li>
+            </ul>
+        </div>
+        <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data" class="col-md-6 mx-auto bg-light p-4 rounded mt-4">
             <div class="form-group">
                 <label for="file">Select files (html, css, js):</label>
                 <input type="file" id="file" name="file" class="form-control-file" multiple required>
