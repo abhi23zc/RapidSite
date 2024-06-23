@@ -11,17 +11,17 @@ app.config['ALLOWED_EXTENSIONS'] = {'html', 'css', 'js'}
 
 db = SQLAlchemy(app)
 
-# User model
+# databse model
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
 
-# Create database tables (run this once to create tables)
+
 with app.app_context():
     db.create_all()
 
-# Function to get list of files in user's upload directory
+
 def get_uploaded_files(username):
     user_upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], username)
     if os.path.exists(user_upload_folder):
@@ -29,7 +29,7 @@ def get_uploaded_files(username):
         return files
     return []
 
-# Check if file extension is allowed
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
@@ -46,7 +46,7 @@ def register():
         if User.query.filter_by(username=username).first():
             flash('Username already exists. Please choose a different one.', 'danger')
         else:
-            # Create new user
+      
             new_user = User(username=username, password=password)
             db.session.add(new_user)
             db.session.commit()
@@ -79,19 +79,18 @@ def upload():
         return redirect(url_for('login'))
     
     if request.method == 'POST':
-        # Check if the post request has the file part
+
         if 'file' not in request.files:
             flash('No file part', 'danger')
             return redirect(request.url)
         
         file = request.files['file']
         
-        # If user does not select file, browser also submits an empty part without filename
         if file.filename == '':
             flash('No selected file', 'danger')
             return redirect(request.url)
         
-        # Check if the file extension is allowed
+
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             user_folder = os.path.join(app.config['UPLOAD_FOLDER'], session['username'])
