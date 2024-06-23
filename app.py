@@ -7,7 +7,6 @@ app = Flask(__name__)
 app.secret_key = 'abhi@123'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['ALLOWED_EXTENSIONS'] = {'html', 'css', 'js'}
 
 db = SQLAlchemy(app)
 
@@ -91,7 +90,7 @@ def upload():
             return redirect(request.url)
         
 
-        if file and allowed_file(file.filename):
+        if file :
             filename = secure_filename(file.filename)
             user_folder = os.path.join(app.config['UPLOAD_FOLDER'], session['username'])
             if not os.path.exists(user_folder):
