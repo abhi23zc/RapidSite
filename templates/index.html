@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index_styles.css') }}">
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container">
+            <h1 class="text-center">Welcome to the File Deployer App</h1>
+        </div>
+    </header>
+    <main class="container mt-4">
+        <div class="jumbotron">
+            <p class="lead">
+                This is a simple file deployer application. Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a>.
+            </p>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Files</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Upload Successful</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Files for {{ username }}</h2>
+            <p>Your HTML file is available at:</p>
+            <a href="{{ html_file_url }}" target="_blank">{{ html_file_url }}</a>
+        </section>
+    </main>
+</body>
+</html>

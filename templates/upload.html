@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Files</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload_styles.css') }}">
+</head>
+<body>
+    <header class="bg-dark text-white py-4">
+        <div class="container">
+            <h1 class="text-center">Upload Files</h1>
+            <p class="text-right"><a href="{{ url_for('logout') }}" class="text-white">Logout</a></p>
+        </div>
+    </header>
+    <main class="container mt-4">
+        <form action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data" class="col-md-6 mx-auto bg-light p-4 rounded">
+            <div class="form-group">
+                <label for="file">Select files (html, css, js):</label>
+                <input type="file" id="file" name="file" class="form-control-file" multiple required>
+            </div>
+            <button type="submit" class="btn btn-success">Upload</button>
+        </form>
+        <div class="messages mt-4">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="list-unstyled">
+                        {% for message in messages %}
+                            <li class="alert alert-info">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+        <p class="mt-4"><a href="{{ url_for('uploaded_files') }}">View Uploaded Files</a></p>
+    </main>
+</body>
+</html>
